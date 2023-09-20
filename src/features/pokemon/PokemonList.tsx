@@ -4,8 +4,8 @@ import { useEffect } from "react";
 
 const PokemonList = () => {
   const dispatch = useDispatch();
-  const pokemonData = useSelector((state: any) => state.pokemon?.data);
-  const loading = useSelector((state: any) => state.pokemon?.loading);
+  const pokemonData = useSelector((state: any) => state.pokemon.data);
+  const loading = useSelector((state: any) => state.pokemon.loading);
 
   useEffect(() => {
     // call action
