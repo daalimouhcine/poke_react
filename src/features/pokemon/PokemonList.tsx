@@ -15,7 +15,6 @@ const PokemonList = () => {
   }, []);
 
   const handleLoadMore = () => {
-    console.log("call handleLoadMore");
     // call action creator to fetch more data from API
     dispatch(fetchMorePokemonStart());
   };
@@ -29,18 +28,17 @@ const PokemonList = () => {
       />
       {/* Check if pokemonData is defined before accessing its properties */}
       {pokemonData ? (
-        <div className='flex gap-5 flex-wrap justify-evenly p-5'>
-          <InfiniteScroll
-            dataLength={pokemonData.length}
-            next={handleLoadMore}
-            hasMore={true}
-            loader={<SkeletonCard />}
-            className='flex gap-5 flex-wrap justify-evenly p-5'>
-            {pokemonData.map((pokemon: any) => (
-              <PokemonCard key={pokemon.name} apiLink={pokemon.url} />
-            ))}
-          </InfiniteScroll>
-        </div>
+        <InfiniteScroll
+          dataLength={pokemonData.length}
+          next={handleLoadMore}
+          hasMore={true}
+          loader={<SkeletonCard />}
+          scrollableTarget='scrollableDiv'
+          className='flex gap-5 flex-wrap justify-evenly p-5'>
+          {pokemonData.map((pokemon: any) => (
+            <PokemonCard key={pokemon.name} apiLink={pokemon.url} />
+          ))}
+        </InfiniteScroll>
       ) : (
         <div>No data available</div>
       )}

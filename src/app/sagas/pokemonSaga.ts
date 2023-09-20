@@ -13,7 +13,7 @@ let NEXT_URL = "";
 function* fetchPokemonList(): Generator<any, void, any> {
   try {
     const pokemonList = yield call(() =>
-      axios.get(`${BASE_URL}/pokemon?limit=10`)
+      axios.get(`${BASE_URL}/pokemon?limit=25`)
     );
     NEXT_URL = pokemonList.data.next;
     yield put(fetchPokemonSuccess(pokemonList.data.results));
