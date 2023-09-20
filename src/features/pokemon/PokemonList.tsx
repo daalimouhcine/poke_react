@@ -1,7 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
-import { fetchPokemonStart } from "./PokemonSlice";
+import { fetchPokemonStart, fetchMorePokemonStart } from "./PokemonSlice";
 import { useEffect } from "react";
 import PokemonCard from "../../components/PokemonCard";
+import SkeletonCard from "../../components/skeletonCard";
 
 const PokemonList = () => {
   const dispatch = useDispatch();
@@ -13,12 +14,18 @@ const PokemonList = () => {
     dispatch(fetchPokemonStart());
   }, []);
 
-  // Check if pokemonData is defined
-  if (loading) return <div>loading...</div>;
+  const handleLoadMore = () => {
+    // call action creator to fetch more data from API
+    dispatch(fetchMorePokemonStart());
+  };
 
   return (
     <div>
-      <button>Pokemon List</button>
+      <img
+        className='w-fit mx-auto h-32'
+        src='/pokemon_logo.png'
+        alt='pokemon logo'
+      />
       {/* Check if pokemonData is defined before accessing its properties */}
       {pokemonData ? (
         <div className='flex gap-5 flex-wrap justify-evenly p-5'>
@@ -29,6 +36,12 @@ const PokemonList = () => {
       ) : (
         <div>No data available</div>
       )}
+      {/* <button
+        className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'
+        onClick={handleLoadMore}>
+        Load More
+      </button> */}
+       {/* <SkeletonCard /> */}
     </div>
   );
 };

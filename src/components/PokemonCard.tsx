@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { PokemonCardProps } from "../interfaces";
+import SkeletonCard from "./skeletonCard";
 
 const PokemonCard = ({ apiLink }: PokemonCardProps) => {
   const [pokemonData, setPokemonData] = useState<any | null>(null);
@@ -9,7 +10,6 @@ const PokemonCard = ({ apiLink }: PokemonCardProps) => {
   const fetchPokemonDetails = async () => {
     try {
       const response = await axios.get(apiLink);
-      console.log("response.data:", response.data);
       setPokemonData(response.data);
     } catch (error) {
       console.error("Error fetching Pokémon details:", error);
@@ -21,7 +21,7 @@ const PokemonCard = ({ apiLink }: PokemonCardProps) => {
 
   if (!pokemonData) {
     // a loading indicator here
-    return <div>Loading...</div>;
+    return <SkeletonCard />;
   }
 
   // background color and shadow color with tailwind colors depending on the pokemon type
@@ -117,44 +117,12 @@ const PokemonCard = ({ apiLink }: PokemonCardProps) => {
   }
 
   return (
-    // <div
-    //   className={`w-48 flex flex-col items-center px-3 py-5 rounded-xl shadow-lg ${backgroundColor} hover:shadow-xl transition duration-300 ease-in-out cursor-pointer`}>
-    //   {/* set background depending on the  */}
-    //   <h3 className='text-xl capitalize'>{pokemonData.name}</h3>
-    //   <div className='text-xs text-gray-700 capitalize'>#{pokemonData.id}</div>
-    //   <div className='text-xs text-gray-700 capitalize'>
-    //     {pokemonData.species.name}
-    //   </div>
-    //   <img
-    //     src={pokemonData.sprites.other["official-artwork"].front_default}
-    //     alt={pokemonData.name}
-    //     width='100'
-    //     height='100'
-    //   />
-    //   <div className='flex flex-col items-center'>
-    //     <div className='flex gap-2'>
-    //       {pokemonData.types.map((type: any) => (
-    //         <div
-    //           key={type.type.name}
-    //           className='text-xs text-white capitalize bg-gray-700 px-2 py-1 rounded-full'>
-    //           {type.type.name}
-    //         </div>
-    //       ))}
-    //     </div>
-    //     <div className='text-xs text-gray-700 capitalize'>
-    //       {pokemonData.height / 10}m
-    //     </div>
-    //     <div className='text-xs text-gray-700 capitalize'>
-    //       {pokemonData.weight / 10}kg
-    //     </div>
-    //   </div>
-    // </div>
-
     <div
       className={`w-56 relative flex justify-between p-4 pt-6 pb-2 rounded-2xl ${
         backgroundColor + " " + shadowColor
       }  transition duration-300 ease-in-out cursor-pointer`}>
       <h5 className='text-white/50 absolute top-1 right-3 z-0 text-3xl'>
+        #
         {pokemonData.id < 10
           ? "00" + pokemonData.id
           : pokemonData.id < 100

@@ -23,10 +23,22 @@ const pokemonSlice = createSlice({
       state.loading = false;
       state.error = action.payload;
     },
+    fetchMorePokemonStart: (state) => {
+      state.loading = true;
+      state.error = null;
+    },
+    fetchMorePokemonSuccess: (state, action: PayloadAction<any[]>) => {
+      state.loading = false;
+      state.data = [...state.data, ...action.payload];
+    },
+    fetchMorePokemonFailure: (state, action: PayloadAction<string>) => {
+      state.loading = false;
+      state.error = action.payload;
+    }
   },
 });
 
-export const { fetchPokemonStart, fetchPokemonSuccess, fetchPokemonFailure } =
+export const { fetchPokemonStart, fetchPokemonSuccess, fetchPokemonFailure, fetchMorePokemonStart, fetchMorePokemonSuccess, fetchMorePokemonFailure} =
   pokemonSlice.actions;
 
 export default pokemonSlice.reducer;

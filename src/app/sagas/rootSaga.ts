@@ -1,6 +1,6 @@
 import { all } from "redux-saga/effects";
-import { watchFetchPokemon } from "./pokemonSaga";
+import { watchFetchPokemon, watchFetchMorePokemon } from "./pokemonSaga";
 
 export default function* rootSaga() {
-  yield all([watchFetchPokemon()]);
+  yield all([watchFetchPokemon(), watchFetchMorePokemon()]);
 }
