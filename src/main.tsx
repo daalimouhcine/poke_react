@@ -1,10 +1,34 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App.tsx'
-import './index.css'
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import PokemonList from "./features/pokemon/PokemonList.tsx";
+import PokemonDetailModal from "./features/pokemon/PokemonDetailModal.tsx";
+import PageNotFound from "./features/pokemon/PageNotFound.tsx";
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
+import { Provider } from "react-redux";
+import store from "./app/store/index.ts";
+
+import "./index.css";
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <PokemonList />,
+  },
+  {
+    path: "/pokemon/:pokemonName",
+    element: <PokemonDetailModal />,
+  },
+  {
+    path: "*",
+    element: <PageNotFound />,
+  },
+]);
+
+ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-)
+    <Provider store={store}>
+      <RouterProvider router={router} />
+    </Provider>
+  </React.StrictMode>
+);
