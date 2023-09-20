@@ -1,10 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-
-interface PokemonState {
-  data: any[]; // You can define a proper type here based on the API response
-  loading: boolean;
-  error: string | null;
-}
+import { PokemonState } from "../../interfaces";
 
 const initialState: PokemonState = {
   data: [],

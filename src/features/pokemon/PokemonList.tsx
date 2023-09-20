@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { fetchPokemonStart } from "./PokemonSlice";
 import { useEffect } from "react";
+import PokemonCard from "../../components/PokemonCard";
 
 const PokemonList = () => {
   const dispatch = useDispatch();
@@ -8,7 +9,7 @@ const PokemonList = () => {
   const loading = useSelector((state: any) => state.pokemon.loading);
 
   useEffect(() => {
-    // call action
+    // call action creator to fetch data from API
     dispatch(fetchPokemonStart());
   }, []);
 
@@ -20,7 +21,11 @@ const PokemonList = () => {
       <button>Pokemon List</button>
       {/* Check if pokemonData is defined before accessing its properties */}
       {pokemonData ? (
-        <pre>{JSON.stringify(pokemonData, null, 2)}</pre>
+        <div className='flex gap-5 flex-wrap justify-evenly p-5'>
+          {pokemonData.map((pokemon: any) => (
+            <PokemonCard key={pokemon.name} apiLink={pokemon.url} />
+          ))}
+        </div>
       ) : (
         <div>No data available</div>
       )}

@@ -11,7 +11,7 @@ function* fetchPokemonList(): Generator<any, void, any> {
   console.log("pokemon saga");
   try {
     const pokemonList = yield call(() =>
-      axios.get(`${BASE_URL}/pokemon?limit=100`)
+      axios.get(`${BASE_URL}/pokemon?limit=10`)
     );
     yield put(fetchPokemonSuccess(pokemonList.data.results));
   } catch (error: any) {
