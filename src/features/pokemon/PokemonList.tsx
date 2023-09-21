@@ -2,8 +2,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchPokemonStart, fetchMorePokemonStart } from "./PokemonSlice";
 import { useEffect } from "react";
 import PokemonCard from "../../components/PokemonCard";
-import SkeletonCard from "../../components/skeletonCard";
 import InfiniteScroll from "react-infinite-scroll-component";
+import SkeletonCard from "../../components/SkeletonCard";
+import PokemonDetailModal from "../modal/PokemonDetailModal";
 
 const PokemonList = () => {
   const dispatch = useDispatch();
@@ -21,6 +22,7 @@ const PokemonList = () => {
 
   return (
     <div>
+      <PokemonDetailModal />
       <img
         className='w-fit mx-auto h-32'
         src='/pokemon_logo.png'

@@ -2,7 +2,6 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import PokemonList from "./features/pokemon/PokemonList.tsx";
-import PokemonDetailModal from "./features/pokemon/PokemonDetailModal.tsx";
 import PageNotFound from "./features/pokemon/PageNotFound.tsx";
 
 import { Provider } from "react-redux";
@@ -14,10 +13,6 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <PokemonList />,
-  },
-  {
-    path: "/pokemon/:pokemonName",
-    element: <PokemonDetailModal />,
   },
   {
     path: "*",

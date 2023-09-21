@@ -1,126 +1,119 @@
+import { useDispatch } from "react-redux";
+import { fetchPokemonDetailStart } from "../features/modal/ModalSlice";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { PokemonCardProps } from "../interfaces";
-import SkeletonCard from "./skeletonCard";
-import { useQuery } from "react-query";
+import SkeletonCard from "./SkeletonCard";
 
 const PokemonCard = ({ apiLink }: PokemonCardProps) => {
-  // const [pokemonData, setPokemonData] = useState<any | null>(null);
+  const [pokemonData, setPokemonData] = useState<any | null>(null);
+  const dispatch = useDispatch();
+
+  const handleModalOpen = () => {
+    dispatch(fetchPokemonDetailStart(apiLink));
+  };
+
   // Fetch Pokémon details from API
   const fetchPokemonDetails = async () => {
     try {
       const response = await axios.get(apiLink);
-      return response;
+      setPokemonData(response.data);
     } catch (error) {
       console.error("Error fetching Pokémon details:", error);
     }
   };
-  const {
-    data: pokemonData,
-    isLoading,
-    isError,
-  } = useQuery<any>("pokemon", fetchPokemonDetails);
+  useEffect(() => {
+    fetchPokemonDetails();
+  }, [apiLink]);
 
   if (!pokemonData) {
     // a loading indicator here
     return <SkeletonCard />;
   }
 
-  // background color and shadow color with tailwind colors depending on the pokemon type
+  // setting background color and shadow color with tailwind colors depending on the pokemon type
   const pokemonType = pokemonData.types[0].type.name;
   let shadowColor = "";
   let backgroundColor = "";
+
   switch (pokemonType) {
     case "grass":
-      shadowColor =
-        "shadow-grass shadow-md hover:shadow-lg hover:shadow-grass ";
+      shadowColor = "shadow-grass hover:shadow-grass ";
       backgroundColor = "bg-grass";
       break;
     case "fire":
-      shadowColor = "shadow-fire shadow-md hover:shadow-lg hover:shadow-fire ";
+      shadowColor = "shadow-fire hover:shadow-fire ";
       backgroundColor = "bg-fire";
       break;
     case "water":
-      shadowColor =
-        "shadow-water shadow-md hover:shadow-lg hover:shadow-water ";
+      shadowColor = "shadow-water hover:shadow-water ";
       backgroundColor = "bg-water";
       break;
     case "bug":
-      shadowColor = "shadow-bug shadow-md hover:shadow-lg hover:shadow-bug ";
+      shadowColor = "shadow-bug hover:shadow-bug ";
       backgroundColor = "bg-bug";
       break;
     case "normal":
-      shadowColor =
-        "shadow-normal shadow-md hover:shadow-lg hover:shadow-normal ";
+      shadowColor = "shadow-normal hover:shadow-normal ";
       backgroundColor = "bg-normal";
       break;
     case "poison":
-      shadowColor =
-        "shadow-poison shadow-md hover:shadow-lg hover:shadow-poison ";
+      shadowColor = "shadow-poison hover:shadow-poison ";
       backgroundColor = "bg-poison";
       break;
     case "electric":
-      shadowColor =
-        "shadow-electric shadow-md hover:shadow-lg hover:shadow-electric ";
+      shadowColor = "shadow-electric hover:shadow-electric ";
       backgroundColor = "bg-electric";
       break;
     case "ground":
-      shadowColor =
-        "shadow-ground shadow-md hover:shadow-lg hover:shadow-ground ";
+      shadowColor = "shadow-ground hover:shadow-ground ";
       backgroundColor = "bg-ground";
       break;
     case "fairy":
-      shadowColor =
-        "shadow-fairy shadow-md hover:shadow-lg hover:shadow-fairy ";
+      shadowColor = "shadow-fairy hover:shadow-fairy ";
       backgroundColor = "bg-fairy";
       break;
     case "fighting":
-      shadowColor =
-        "shadow-fighting shadow-md hover:shadow-lg hover:shadow-fighting ";
+      shadowColor = "shadow-fighting hover:shadow-fighting ";
       backgroundColor = "bg-fighting";
       break;
     case "psychic":
-      shadowColor =
-        "shadow-psychic shadow-md hover:shadow-lg hover:shadow-psychic ";
+      shadowColor = "shadow-psychic hover:shadow-psychic ";
       backgroundColor = "bg-psychic";
       break;
     case "rock":
-      shadowColor = "shadow-rock shadow-md hover:shadow-lg hover:shadow-rock ";
+      shadowColor = "shadow-rock hover:shadow-rock ";
       backgroundColor = "bg-rock";
       break;
     case "ghost":
-      shadowColor =
-        "shadow-ghost shadow-md hover:shadow-lg hover:shadow-ghost ";
+      shadowColor = "shadow-ghost hover:shadow-ghost ";
       backgroundColor = "bg-ghost";
       break;
     case "ice":
-      shadowColor = "shadow-ice shadow-md hover:shadow-lg hover:shadow-ice ";
+      shadowColor = "shadow-ice hover:shadow-ice ";
       backgroundColor = "bg-ice";
       break;
     case "dragon":
-      shadowColor =
-        "shadow-dragon shadow-md hover:shadow-lg hover:shadow-dragon ";
+      shadowColor = "shadow-dragon hover:shadow-dragon ";
       backgroundColor = "bg-dragon";
       break;
     case "dark":
-      shadowColor = "shadow-dark shadow-md hover:shadow-lg hover:shadow-dark ";
+      shadowColor = "shadow-dark hover:shadow-dark ";
       backgroundColor = "bg-dark";
       break;
     case "steel":
-      // change the shadow position to the center
-      shadowColor =
-        "shadow-steel shadow-md hover:shadow-lg hover:shadow-steel ";
+      shadowColor = "shadow-steel hover:shadow-steel ";
       backgroundColor = "bg-steel";
       break;
     default:
-      shadowColor =
-        "shadow-normal shadow-md hover:shadow-lg hover:shadow-normal ";
+      shadowColor = "shadow-normal hover:shadow-normal ";
       backgroundColor = "bg-normal";
   }
 
   return (
     <div
-      className={`w-56 relative flex justify-between p-4 pt-6 pb-2 rounded-2xl ${
+      onClick={handleModalOpen}
+      className={`w-56 relative flex justify-between p-4 pt-6 pb-2 rounded-2xl shadow-md hover:shadow-lg ${
         backgroundColor + " " + shadowColor
       }  transition duration-300 ease-in-out cursor-pointer`}>
       <h5 className='text-white/50 absolute top-1 right-3 z-0 text-3xl'>
