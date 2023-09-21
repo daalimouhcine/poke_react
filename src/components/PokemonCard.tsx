@@ -2,22 +2,24 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { PokemonCardProps } from "../interfaces";
 import SkeletonCard from "./skeletonCard";
+import { useQuery } from "react-query";
 
 const PokemonCard = ({ apiLink }: PokemonCardProps) => {
-  const [pokemonData, setPokemonData] = useState<any | null>(null);
-
+  // const [pokemonData, setPokemonData] = useState<any | null>(null);
   // Fetch Pokémon details from API
   const fetchPokemonDetails = async () => {
     try {
       const response = await axios.get(apiLink);
-      setPokemonData(response.data);
+      return response;
     } catch (error) {
       console.error("Error fetching Pokémon details:", error);
     }
   };
-  useEffect(() => {
-    fetchPokemonDetails();
-  }, [apiLink]);
+  const {
+    data: pokemonData,
+    isLoading,
+    isError,
+  } = useQuery<any>("pokemon", fetchPokemonDetails);
 
   if (!pokemonData) {
     // a loading indicator here
