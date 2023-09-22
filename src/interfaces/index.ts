@@ -18,3 +18,5 @@ export interface PokemonAbility {
 export interface PokemonCardProps {
   apiLink: string;
 }
+
+
