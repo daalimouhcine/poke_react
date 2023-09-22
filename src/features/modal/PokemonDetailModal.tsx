@@ -1,22 +1,59 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { closeModal } from "./ModalSlice";
+import { useEffect, useState } from "react";
 
 const PokemonDetailModal = () => {
-  // const dispatch = useDispatch();
+  const [displayModal, setDisplayModal] = useState<boolean>(false);
+  const dispatch = useDispatch();
   const modalData = useSelector((state: any) => state.modal);
+
+  useEffect(() => {
+    if (modalData.isOpen) {
+      setTimeout(() => {
+        setDisplayModal(true);
+      }, 100);
+    } else {
+      setDisplayModal(false);
+    }
+  }, [modalData.isOpen]);
+
+  const handleCloseModal = () => {
+    setDisplayModal(false);
+    setTimeout(() => {
+      dispatch(closeModal());
+    }, 100);
+  };
 
   return (
     <div
-      className={`fixed w-screen h-screen bg-gray-500/30 ${
-        modalData.isOpen ? "block" : "hidden"
-      } transition-all duration-200 ease-linear `}>
-      <div className='w-1/2 h-1/2 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white rounded-lg '>
-        {/* display the data */}
-        <div className='flex justify-between items-center px-4 py-2 bg-gray-100 rounded-t-lg'>
-          <h1 className='text-xl font-bold text-gray-700'>{modalData.pokemonDetail.name}</h1>
-          <h1 className='text-xl font-bold text-gray-700'>{modalData.pokemonDetail.id}</h1>
+      id='modal_overlay'
+      className={`z-20 fixed inset-0 bg-black bg-opacity-30 h-screen w-full justify-center items-start md:items-center pt-10 md:pt-0 ${
+        modalData.isOpen ? "flex" : "hidden"
+      }`}>
+      {/* modal */}
+      <div
+        id='modal'
+        className={`${
+          displayModal ? "-translate-y-1/2 top-1/2" : "-top-full"
+        } absolute h-1/2 w-1/2 bg-white rounded shadow-lg transition-all duration-300`}>
+        {/* button close */}
+        <button
+          onClick={handleCloseModal}
+          className='absolute -top-3 -right-3 bg-red-500 hover:bg-red-600 text-2xl w-10 h-10 rounded-full focus:outline-none text-white'>
+          ✗
+        </button>
+        {/* header */}
+        <div className='px-4 py-3 border-b border-gray-200'>
+          <h2 className='text-xl font-semibold text-gray-600'>{modalData.pokemonDetail?.id}</h2>
+        </div>
+        {/* body */}
+        <div className='w-full p-3'>
+          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Asperiores,
+          quis tempora! Similique, explicabo quaerat maxime corrupti tenetur
+          blanditiis voluptas molestias totam? Quaerat laboriosam suscipit
+          repellat aliquam blanditiis eum quos nihil.
         </div>
       </div>
-
     </div>
   );
 };

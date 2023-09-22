@@ -5,7 +5,7 @@ import {
   fetchPokemonDetailFailure,
 } from "../../features/modal/ModalSlice";
 
-function* fetchPokemonDetail(action: any): Generator<any, void, any> {
+function* fetchPokemonDetail(action: FetchPokemonDetailStartAction): Generator<any, void, any> {
   try {
     const pokemonDetail = yield call(() => axios.get(action.payload));
     // console.log(pokemonDetail.data);
