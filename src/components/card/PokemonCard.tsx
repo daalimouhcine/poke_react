@@ -114,7 +114,7 @@ const PokemonCard = ({ apiLink }: PokemonCardProps) => {
   return (
     <div
       onClick={handleModalOpen}
-      id={`pokemon-card-${pokemonData.id}`}
+      data-cy={`pokemon-card-${pokemonData.id}`}
       className={`w-56 relative flex justify-between p-4 pt-6 pb-2 rounded-2xl shadow-md hover:shadow-lg ${
         backgroundColor + " " + shadowColor
       }  transition duration-300 ease-in-out cursor-pointer`}>
