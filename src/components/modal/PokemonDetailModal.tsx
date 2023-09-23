@@ -59,7 +59,11 @@ const PokemonDetailModal = () => {
           <div className='w-full h-full flex max-sm:flex-col-reverse items-center gap-x-5 justify-around'>
             <div className='w-1/3 max-sm:w-[50%] flex flex-col gap-y-3 items-center my-auto'>
               <img
-                src={pokemonDetail?.sprites[imgSide]}
+                src={
+                  imgSide === "front_default"
+                    ? pokemonDetail?.sprites.front_default
+                    : pokemonDetail?.sprites.back_default
+                }
                 alt={pokemonDetail?.name}
                 className='w-full object-contain'
               />
@@ -120,7 +124,7 @@ const PokemonDetailModal = () => {
                 <div className='flex flex-col gap-y-2'>
                   <h3 className='text-lg font-semibold text-gray-700'>Stats</h3>
                   {pokemonDetail?.stats.map((statDetail: PokemonStat) => (
-                    <StatBar key={statDetail.stat.name} statInfo={statDetail}/>
+                    <StatBar key={statDetail.stat.name} statInfo={statDetail} />
                   ))}
                 </div>
               </div>
