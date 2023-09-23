@@ -1,13 +1,10 @@
-import {
-  runSaga,
-  // Saga
-} from "redux-saga";
+import { runSaga } from "redux-saga";
 import axios from "axios";
-import { fetchPokemonList } from "../../app/sagas/pokemonSaga"; // Import the saga you want to test
+import { fetchPokemonList } from "../app/sagas/pokemonSaga"; // Import the saga you want to test
 import {
   fetchPokemonSuccess,
   fetchPokemonFailure,
-} from "../../app/reducers/PokemonSlice";
+} from "../app/reducers/PokemonSlice";
 
 // Mock axios.get to return a resolved promise with data
 jest.mock("axios");
