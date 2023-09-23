@@ -3,9 +3,11 @@ import axios from "axios";
 import {
   fetchPokemonDetailSuccess,
   fetchPokemonDetailFailure,
-} from "../../features/modal/ModalSlice";
+} from "../reducers/ModalSlice";
 
-function* fetchPokemonDetail(action: FetchPokemonDetailStartAction): Generator<any, void, any> {
+function* fetchPokemonDetail(
+  action: FetchPokemonDetailStartAction
+): Generator<any, void, any> {
   try {
     const pokemonDetail = yield call(() => axios.get(action.payload));
     // console.log(pokemonDetail.data);

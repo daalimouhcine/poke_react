@@ -1,8 +1,8 @@
 import { useDispatch } from "react-redux";
-import { fetchPokemonDetailStart } from "../features/modal/ModalSlice";
+import { fetchPokemonDetailStart } from "../../app/reducers/ModalSlice";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { PokemonCardProps } from "../interfaces";
+import { PokemonCardProps } from "../../interfaces";
 import SkeletonCard from "./SkeletonCard";
 
 const PokemonCard = ({ apiLink }: PokemonCardProps) => {

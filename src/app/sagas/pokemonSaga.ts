@@ -5,7 +5,7 @@ import {
   fetchPokemonFailure,
   fetchMorePokemonSuccess,
   fetchMorePokemonFailure,
-} from "../../features/pokemon/PokemonSlice";
+} from "../reducers/PokemonSlice";
 
 const BASE_URL = "https://pokeapi.co/api/v2";
 let NEXT_URL = "";

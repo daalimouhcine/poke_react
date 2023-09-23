@@ -1,9 +1,12 @@
 import { useDispatch, useSelector } from "react-redux";
-import { fetchPokemonStart, fetchMorePokemonStart } from "./PokemonSlice";
+import {
+  fetchPokemonStart,
+  fetchMorePokemonStart,
+} from "../../app/reducers/PokemonSlice";
 import { useEffect } from "react";
-import PokemonCard from "../../components/PokemonCard";
-import SkeletonCard from "../../components/SkeletonCard";
-import PokemonDetailModal from "../modal/PokemonDetailModal";
+import PokemonCard from "../../components/card/PokemonCard";
+import SkeletonCard from "../../components/card/SkeletonCard";
+import PokemonDetailModal from "../../components/modal/PokemonDetailModal";
 import { Pokemon } from "../../interfaces";
 
 const PokemonList = () => {
