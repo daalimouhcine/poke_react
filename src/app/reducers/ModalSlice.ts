@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { ModalState } from "../../interfaces/modal";
+import { PokemonDetail } from "../../interfaces";
 
 const initialState: ModalState = {
   pokemonDetail: null,
@@ -18,7 +19,7 @@ const modalSlice = createSlice({
       state.loading = true;
       state.error = null;
     },
-    fetchPokemonDetailSuccess(state, action: PayloadAction<any>) {
+    fetchPokemonDetailSuccess(state, action: PayloadAction<PokemonDetail>) {
       state.pokemonDetail = action.payload;
       state.loading = false;
       state.isOpen = true;
@@ -44,6 +45,5 @@ export const {
   fetchPokemonDetailFailure,
   closeModal,
 } = modalSlice.actions;
-
 
 export default modalSlice.reducer;

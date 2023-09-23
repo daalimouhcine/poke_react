@@ -8,10 +8,13 @@ import PokemonCard from "../../components/card/PokemonCard";
 import SkeletonCard from "../../components/card/SkeletonCard";
 import PokemonDetailModal from "../../components/modal/PokemonDetailModal";
 import { Pokemon } from "../../interfaces";
+import { PokemonSliceState } from "../../interfaces/Tredux";
 
 const PokemonList = () => {
   const dispatch = useDispatch();
-  const { data, loading } = useSelector((state: any) => state.pokemon);
+  const { data, loading } = useSelector(
+    (state: PokemonSliceState) => state.pokemon
+  );
 
   useEffect(() => {
     // call action creator to fetch data from API
@@ -44,16 +47,16 @@ const PokemonList = () => {
         alt='pokemon logo'
       />
       {/* Check if pokemonData is defined before accessing its properties */}
-      {data ? (
-        <div className='flex gap-5 flex-wrap justify-evenly p-5'>
-          {data.map((pokemon: Pokemon) => (
+      <div className='flex gap-5 flex-wrap justify-evenly p-5'>
+        {data ? (
+          data.map((pokemon: Pokemon) => (
             <PokemonCard key={pokemon.name} apiLink={pokemon.url} />
-          ))}
-        </div>
-      ) : (
-        <div>No data available</div>
-      )}
-      {loading && <SkeletonCard />}
+          ))
+        ) : (
+          <div>No data available</div>
+        )}
+        {loading && <SkeletonCard />}
+      </div>
     </div>
   );
 };

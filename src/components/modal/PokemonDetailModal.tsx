@@ -3,19 +3,23 @@ import { closeModal } from "../../app/reducers/ModalSlice";
 import { useEffect, useState } from "react";
 import StatBar from "../StatBar";
 import ModalSkeleton from "./ModalSkeleton";
+import { Ability, Type, PokemonStat } from "../../interfaces";
+import { ModalSliceState } from "../../interfaces/Tredux";
 
 const PokemonDetailModal = () => {
   const [imgSide, setImgSide] = useState<string>("front_default");
   const [displayModal, setDisplayModal] = useState<boolean>(false);
   const dispatch = useDispatch();
-  const { pokemonDetail, loading, isOpen } =
-    useSelector((state: any) => state.modal);
+  const { pokemonDetail, loading, isOpen } = useSelector(
+    (state: ModalSliceState) => state.modal
+  );
 
   useEffect(() => {
     if (isOpen) {
       setTimeout(() => {
         setDisplayModal(true);
       }, 100);
+      console.log(pokemonDetail);
     } else {
       setDisplayModal(false);
     }
@@ -83,7 +87,7 @@ const PokemonDetailModal = () => {
                   {pokemonDetail?.name}
                 </h2>
                 <div className='flex gap-x-2'>
-                  {pokemonDetail?.types.map((type: any) => (
+                  {pokemonDetail?.types.map((type: Type) => (
                     <div
                       key={type.type.name}
                       className='w-fit text-xs bg-gray-200 px-3 py-1 rounded-full'>
@@ -99,7 +103,7 @@ const PokemonDetailModal = () => {
                     Abilities
                   </h3>
                   <div className='flex gap-x-3'>
-                    {pokemonDetail?.abilities.map((ability: any) => (
+                    {pokemonDetail?.abilities.map((ability: Ability) => (
                       <div
                         key={ability.ability.name}
                         className='flex gap-x-2 items-center'>
@@ -115,8 +119,8 @@ const PokemonDetailModal = () => {
                 </div>
                 <div className='flex flex-col gap-y-2'>
                   <h3 className='text-lg font-semibold text-gray-700'>Stats</h3>
-                  {pokemonDetail?.stats.map((stat: any) => (
-                    <StatBar key={stat.stat.name} stat={stat} />
+                  {pokemonDetail?.stats.map((statDetail: PokemonStat) => (
+                    <StatBar key={statDetail.stat.name} statInfo={statDetail}/>
                   ))}
                 </div>
               </div>

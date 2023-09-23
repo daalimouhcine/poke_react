@@ -1,33 +1,44 @@
 import { put, takeLatest, call } from "redux-saga/effects";
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
 import {
   fetchPokemonSuccess,
   fetchPokemonFailure,
   fetchMorePokemonSuccess,
   fetchMorePokemonFailure,
 } from "../reducers/PokemonSlice";
+import { PokemonResponse } from "../../interfaces/Tredux";
 
 const BASE_URL = "https://pokeapi.co/api/v2";
 let NEXT_URL = "";
 
 function* fetchPokemonList(): Generator<any, void, any> {
   try {
-    const pokemonList = yield call(() =>
+    const pokemonList: AxiosResponse<PokemonResponse> = yield call(() =>
       axios.get(`${BASE_URL}/pokemon?limit=25`)
     );
     NEXT_URL = pokemonList.data.next;
     yield put(fetchPokemonSuccess(pokemonList.data.results));
-  } catch (error: any) {
-    yield put(fetchPokemonFailure(error));
+  } catch (error: unknown) {
+    if (typeof error === "string") {
+      yield put(fetchPokemonFailure(error));
+    } else {
+      yield put(fetchPokemonFailure("An error occurred."));
+    }
   }
 }
 function* fetchMorePokemonList(): Generator<any, void, any> {
   try {
-    const pokemonList = yield call(() => axios.get(NEXT_URL));
+    const pokemonList: AxiosResponse<PokemonResponse> = yield call(() =>
+      axios.get(NEXT_URL)
+    );
     NEXT_URL = pokemonList.data.next;
     yield put(fetchMorePokemonSuccess(pokemonList.data.results));
-  } catch (error: any) {
-    yield put(fetchMorePokemonFailure(error));
+  } catch (error: unknown) {
+    if (typeof error === "string") {
+      yield put(fetchMorePokemonFailure(error));
+    } else {
+      yield put(fetchMorePokemonFailure("An error occurred."));
+    }
   }
 }
 

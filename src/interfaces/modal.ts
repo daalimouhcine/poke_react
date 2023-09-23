@@ -1,5 +1,7 @@
+import { PokemonDetail } from ".";
+
 export interface ModalState {
-  pokemonDetail: any;
+  pokemonDetail: PokemonDetail | null;
   loading: boolean;
   error: string | null;
   selectedPokemon: string | null;

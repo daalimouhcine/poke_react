@@ -2,11 +2,12 @@ import { useDispatch } from "react-redux";
 import { fetchPokemonDetailStart } from "../../app/reducers/ModalSlice";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { PokemonCardProps } from "../../interfaces";
+import { PokemonDetail, Type } from "../../interfaces";
 import SkeletonCard from "./SkeletonCard";
+import { PokemonCardProps } from "../../interfaces/Tprops";
 
 const PokemonCard = ({ apiLink }: PokemonCardProps) => {
-  const [pokemonData, setPokemonData] = useState<any | null>(null);
+  const [pokemonData, setPokemonData] = useState<PokemonDetail | null>(null);
   const dispatch = useDispatch();
 
   const handleModalOpen = () => {
@@ -129,7 +130,7 @@ const PokemonCard = ({ apiLink }: PokemonCardProps) => {
           {pokemonData.name.charAt(0).toUpperCase() + pokemonData.name.slice(1)}
         </h2>
         <div className='flex flex-col gap-y-2'>
-          {pokemonData.types.map((type: any) => (
+          {pokemonData.types.map((type: Type) => (
             <div
               key={type.type.name}
               className='w-fit text-xs bg-white/30 px-3 py-1 rounded-full'>
