@@ -22,8 +22,10 @@
     "redux-saga": "^1.2.3"
   },
   "devDependencies": {
+    "@testing-library/cypress": "^10.0.1",
     "@testing-library/jest-dom": "^6.1.3",
     "@testing-library/react": "^14.0.0",
+    "@types/cypress": "^1.1.3",
     "@types/jest": "^29.5.5",
     "@types/react": "^18.2.15",
     "@types/react-dom": "^18.2.7",
@@ -31,6 +33,8 @@
     "@typescript-eslint/parser": "^6.0.0",
     "@vitejs/plugin-react": "^4.0.3",
     "autoprefixer": "^10.4.15",
+    "cypress": "^13.2.0",
+    "cypress-testing-library": "^4.0.0",
     "eslint": "^8.45.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.3",

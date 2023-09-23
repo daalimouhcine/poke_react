@@ -38,7 +38,7 @@ const PokemonDetailModal = () => {
 
   return (
     <div
-      id='modal_overlay'
+      id='pokemon-modal'
       className={`z-20 fixed inset-0 bg-black bg-opacity-30 h-screen w-full justify-center items-start md:items-center pt-10 md:pt-0 ${
         isOpen ? "flex" : "hidden"
       }`}>
@@ -49,6 +49,7 @@ const PokemonDetailModal = () => {
         } absolute h-fit w-[800px] max-lg:w-[700px] max-md:w-[500px] max-sm:w-[90%] bg-white rounded shadow-lg transition-all duration-300 px-3 py-6`}>
         {/* button close */}
         <button
+          id='close-pokemon-modal-button'
           onClick={handleCloseModal}
           className='absolute -top-3 -right-3 bg-red-500 hover:bg-red-600 text-2xl w-10 h-10 rounded-full focus:outline-none text-white'>
           ✗
@@ -87,8 +88,11 @@ const PokemonDetailModal = () => {
             </div>
             <div className='w-2/3 max-sm:w-[90%] flex flex-col'>
               <div className='space-y-2 mb-5'>
-                <h2 className='text-3xl font-bold text-gray-700'>
-                  {pokemonDetail?.name}
+                <h2
+                  id='modal-pokemon-name'
+                  className='text-3xl font-bold text-gray-700'>
+                  {pokemonDetail?.name[0].toUpperCase() +
+                    pokemonDetail?.name.slice(1)}
                 </h2>
                 <div className='flex gap-x-2'>
                   {pokemonDetail?.types.map((type: Type) => (
