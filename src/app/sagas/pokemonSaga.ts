@@ -11,7 +11,7 @@ import { PokemonResponse } from "../../interfaces/Tredux";
 const BASE_URL = "https://pokeapi.co/api/v2";
 let NEXT_URL = "";
 
-function* fetchPokemonList(): Generator<any, void, any> {
+export function* fetchPokemonList(): Generator<any, void, any> {
   try {
     const pokemonList: AxiosResponse<PokemonResponse> = yield call(() =>
       axios.get(`${BASE_URL}/pokemon?limit=25`)
@@ -26,7 +26,7 @@ function* fetchPokemonList(): Generator<any, void, any> {
     }
   }
 }
-function* fetchMorePokemonList(): Generator<any, void, any> {
+export function* fetchMorePokemonList(): Generator<any, void, any> {
   try {
     const pokemonList: AxiosResponse<PokemonResponse> = yield call(() =>
       axios.get(NEXT_URL)
