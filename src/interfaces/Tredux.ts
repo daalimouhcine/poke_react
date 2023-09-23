@@ -17,7 +17,7 @@ export interface ModalSliceState {
 }
 
 
-interface FetchPokemonDetailStartAction {
+export interface FetchPokemonDetailStartAction {
   type: string;
   payload: string;
 }

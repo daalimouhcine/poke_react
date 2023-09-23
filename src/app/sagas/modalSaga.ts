@@ -4,6 +4,7 @@ import {
   fetchPokemonDetailSuccess,
   fetchPokemonDetailFailure,
 } from "../reducers/ModalSlice";
+import { FetchPokemonDetailStartAction } from "../../interfaces/Tredux";
 
 function* fetchPokemonDetail(
   action: FetchPokemonDetailStartAction
