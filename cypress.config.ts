@@ -9,9 +9,6 @@ export default defineConfig({
   // chromeWebSecurity: false,
   e2e: {
     baseUrl: "http://127.0.0.1:5173/",
-    setupNodeEvents(on, config) {
-      // return require("./cypress/plugins/index.js")(on, config);
-    },
     specPattern: "cypress/e2e/**/*.{js,jsx,ts,tsx}",
   },
 });
